@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMC - IVF Fertility Clinic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Noto Sans KR', Arial, sans-serif;
+            background: #000;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .slideshow-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slides-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .doctor-image-container {
+            flex: 1;
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .doctor-image {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+        }
+
+        .doctor-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(18, 59, 87, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 25px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .clinic-badge {
+            display: inline-block;
+            background: #CF7457;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .duty-time {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .duty-label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            white-space: nowrap;
+        }
+
+        .duty-hours {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            white-space: nowrap;
+        }
+
+        .divider {
+            width: 1px;
+            height: 35px;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Navigation Buttons */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(18, 59, 87, 0.7);
+            backdrop-filter: blur(5px);
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            font-size: 26px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: #CF7457;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn { left: 20px; }
+        .next-btn { right: 20px; }
+
+        /* Dots Navigation */
+        .dots-container {
+            position: absolute;
+            bottom: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .dot.active {
+            background: #CF7457;
+            border-color: #CF7457;
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .doctor-info {
+                flex-direction: column;
+                gap: 10px;
+                padding: 18px 20px;
+            }
+
+            .divider {
+                width: 60px;
+                height: 1px;
+            }
+
+            .clinic-badge {
+                font-size: 14px;
+                padding: 8px 20px;
+            }
+
+            .duty-label {
+                font-size: 11px;
+            }
+
+            .duty-hours {
+                font-size: 18px;
+            }
+
+            .nav-btn {
+                width: 42px;
+                height: 42px;
+                font-size: 20px;
+            }
+
+            .dots-container {
+                bottom: 100px;
+            }
+
+            .dot {
+                width: 10px;
+                height: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slideshow-container">
+        <div class="slides-wrapper" id="slidesWrapper">
+            <!-- Slide 1 -->
+            <div class="slide">
+                <div class="doctor-image-container">
+                    <img src="https://raw.githubusercontent.com/thekingsmakers/KMC-SCHD/main/images/Doc1.jpeg" alt="Doctor 1" class="doctor-image">
+                </div>
+                <div class="doctor-info">
+                    <span class="clinic-badge">KMC - IVF Fertility Clinic</span>
+                    <div class="divider"></div>
+                    <div class="duty-time">
+                        <span class="duty-label">Duty Time</span>
+                        <span class="duty-hours">8:00 PM - 5:30 PM</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide">
+                <div class="doctor-image-container">
+                    <img src="https://raw.githubusercontent.com/thekingsmakers/KMC-SCHD/main/images/Doc2.jpeg" alt="Doctor 2" class="doctor-image">
+                </div>
+                <div class="doctor-info">
+                    <span class="clinic-badge">KMC - IVF Fertility Clinic</span>
+                    <div class="divider"></div>
+                    <div class="duty-time">
+                        <span class="duty-label">Duty Time</span>
+                        <span class="duty-hours">8:00 PM - 5:30 PM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nav -->
+        <button class="nav-btn prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="nav-btn next-btn" onclick="changeSlide(1)">&#10095;</button>
+
+        <!-- Dots -->
+        <div class="dots-container">
+            <span class="dot active" onclick="currentSlide(0)"></span>
+            <span class="dot" onclick="currentSlide(1)"></span>
+        </div>
+    </div>
+
+    <script>
+        let currentSlideIndex = 0;
+        const totalSlides = 2;
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            if (currentSlideIndex >= totalSlides) currentSlideIndex = 0;
+            else if (currentSlideIndex < 0) currentSlideIndex = totalSlides - 1;
+            updateSlide();
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index;
+            updateSlide();
+        }
+
+        function updateSlide() {
+            document.getElementById('slidesWrapper').style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlideIndex);
+            });
+        }
+
+        setInterval(() => changeSlide(1), 5000);
+    </script>
+</body>
+</html>
