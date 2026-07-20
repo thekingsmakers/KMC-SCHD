@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMC - IVF Fertility Clinic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #f5f7fa;
+            min-height: 100vh;
+            color: #123B57;
+        }
+
+        /* Header / Logo Section */
+        .header {
+            background: #123B57;
+            padding: 25px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .logo-container {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 12px;
+            display: block;
+            border: none;
+            border-radius: 0;
+            background: none;
+            box-shadow: none;
+        }
+
+        .logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .clinic-name {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+            letter-spacing: 1px;
+        }
+
+        .clinic-subtitle {
+            font-size: 18px;
+            color: #CF7457;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            white-space: nowrap;
+            display: block;
+            text-align: center;
+            animation: subtleMove 3s ease-in-out infinite;
+        }
+
+        @keyframes subtleMove {
+            0%, 100% { transform: translateX(-8px); }
+            50% { transform: translateX(8px); }
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            font-weight: 600;
+            color: #123B57;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #CF7457;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* Slideshow Container */
+        .slideshow-container {
+            position: relative;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            background: #123B57;
+        }
+
+        .slides-wrapper {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            min-width: 100%;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .doctor-image-container {
+            width: 100%;
+            overflow: hidden;
+            line-height: 0;
+        }
+
+        .doctor-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .doctor-info {
+            text-align: center;
+            padding: 30px 20px;
+            background: white;
+            width: 100%;
+        }
+
+        .clinic-badge {
+            display: inline-block;
+            background: #CF7457;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(207, 116, 87, 0.3);
+        }
+
+        .duty-time {
+            background: #f0f4f8;
+            padding: 20px 35px;
+            border-radius: 15px;
+            border-left: 4px solid #123B57;
+        }
+
+        .duty-label {
+            font-size: 14px;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .duty-hours {
+            font-size: 22px;
+            font-weight: 600;
+            color: #123B57;
+        }
+
+        /* Navigation Buttons */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(18, 59, 87, 0.9);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-btn:hover {
+            background: #CF7457;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn {
+            left: 15px;
+        }
+
+        .next-btn {
+            right: 15px;
+        }
+
+        /* Dots Navigation */
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #CF7457;
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background: #123B57;
+        }
+
+        /* Footer */
+        .footer {
+            background: #123B57;
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+            margin-top: 40px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header {
+                padding: 18px 15px;
+            }
+
+            .logo {
+                width: 150px;
+            }
+
+            .clinic-name {
+                font-size: 22px;
+            }
+
+            .clinic-subtitle {
+                font-size: 14px;
+                letter-spacing: 2px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .doctor-info {
+                padding: 20px 15px;
+            }
+
+            .clinic-badge {
+                font-size: 14px;
+                padding: 8px 20px;
+            }
+
+            .duty-time {
+                padding: 15px 25px;
+            }
+
+            .duty-hours {
+                font-size: 18px;
+            }
+
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .prev-btn {
+                left: 10px;
+            }
+
+            .next-btn {
+                right: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                width: 120px;
+            }
+
+            .clinic-name {
+                font-size: 18px;
+            }
+
+            .clinic-subtitle {
+                font-size: 12px;
+                letter-spacing: 1px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .nav-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-content {
+            animation: fadeIn 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Logo -->
+    <header class="header">
+        <div class="logo-container">
+            <img class="logo" src="https://raw.githubusercontent.com/thekingsmakers/KMC-SCHD/main/images/Logo.png" alt="KMC Logo">
+            <h1 class="clinic-name">Korean Medical Center</h1>
+            <p class="clinic-subtitle">IVF Fertility Clinic</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <h2 class="section-title">Doctors on Duty</h2>
+
+        <!-- Slideshow -->
+        <div class="slideshow-container">
+            <div class="slides-wrapper" id="slidesWrapper">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <div class="doctor-image-container">
+                        <img src="https://raw.githubusercontent.com/thekingsmakers/KMC-SCHD/main/images/Doc1.jpeg" alt="Dr. Park Ji-woo" class="doctor-image">
+                    </div>
+                    <div class="doctor-info">
+                        <span class="clinic-badge">KMC - IVF Fertility Clinic</span>
+                        <div class="duty-time">
+                            <p class="duty-label">Duty Time</p>
+                            <p class="duty-hours">8:00 PM - 5:30 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <div class="doctor-image-container">
+                        <img src="https://raw.githubusercontent.com/thekingsmakers/KMC-SCHD/main/images/Doc2.jpeg" alt="Dr. Kim Soo-yeon" class="doctor-image">
+                    </div>
+                    <div class="doctor-info">
+                        <span class="clinic-badge">KMC - IVF Fertility Clinic</span>
+                        <div class="duty-time">
+                            <p class="duty-label">Duty Time</p>
+                            <p class="duty-hours">8:00 PM - 5:30 PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <button class="nav-btn prev-btn" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="nav-btn next-btn" onclick="changeSlide(1)">&#10095;</button>
+
+            <!-- Dots Navigation -->
+            <div class="dots-container">
+                <span class="dot active" onclick="currentSlide(0)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">Korean Medical Center - IVF Fertility Clinic</p>
+    </footer>
+
+    <script>
+        let currentSlideIndex = 0;
+        const totalSlides = 2;
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            
+            if (currentSlideIndex >= totalSlides) {
+                currentSlideIndex = 0;
+            } else if (currentSlideIndex < 0) {
+                currentSlideIndex = totalSlides - 1;
+            }
+            
+            updateSlide();
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index;
+            updateSlide();
+        }
+
+        function updateSlide() {
+            const wrapper = document.getElementById('slidesWrapper');
+            wrapper.style.transform = `translateX(-${currentSlideIndex * 100}%)`;
+            
+            // Update dots
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlideIndex);
+            });
+        }
+
+        // Auto-advance slides every 5 seconds
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+    </script>
+</body>
+</html>
